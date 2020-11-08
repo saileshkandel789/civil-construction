@@ -13,7 +13,6 @@ const banner = require("./routes/api/Banner");
 const booknow = require("./routes/api/BookNow");
 const project = require("./routes/api/Project");
 const team = require("./routes/api/Team");
-const video = require("./routes/api/Video");
 const vdo = require("./routes/api/Vdo");
 
 
@@ -26,10 +25,12 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+// const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join("uploads")));
 
 // DB config
 const db = require("./config/keys").mongoURI;
+const nodeenv =require("./config/keys").NODE_ENV;
 
 // connect to mongodb
 mongoose
@@ -55,9 +56,16 @@ app.use("/api/banner", banner);
 app.use("/api/booknow", booknow);
 app.use("/api/project", project);
 app.use("/api/team", team);
-app.use("/api/video", video);
 app.use("/api/upload", vdo);
 
+
+if (nodeenv === "production") {
+  app.use(express.static(path.join( '../client/build')))
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve( '../client', 'build', 'index.html'))
+  )
+}
 
 
 app.listen(port, () => console.log(`server running on port ${port}`));

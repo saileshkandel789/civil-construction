@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,Fragment } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import classnames from "classnames";
@@ -8,7 +8,9 @@ const AdminNavbar = (props) => {
   
 
   return (
-    <div className="admin-navbar">
+    <Fragment>
+    <div id="mobilenav"></div>
+    <div className="admin-navbar" id="navbar">
       <Link to="/">
         <div className="logo">
           <img src={Logo} alt="logo" className="img-fluid" />
@@ -131,9 +133,9 @@ const AdminNavbar = (props) => {
         </li>
         <li>
           <Link
-            to="/video"
+            to="/dashboard/Videolist"
             className={classnames({
-              ishover: props.location.pathname === "/video",
+              ishover: props.location.pathname === "/dashboard/Videolist",
             })}
           >
             VideoList
@@ -151,6 +153,8 @@ const AdminNavbar = (props) => {
         </li>
       </ul>
     </div>
+    
+    </Fragment>
   );
 };
 

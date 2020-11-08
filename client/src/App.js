@@ -37,6 +37,7 @@ import ServicePage from "./containers/dashboard/service/ServicePage";
 import AddVideo from "./containers/dashboard/vdo/upload";
 import VideoShow from "./containers/dashboard/vdo/videoShow";
 import VideoPlay from "./containers/dashboard/vdo/videoPlayer";
+import AdminVideo from "./containers/dashboard/vdo/videoDashboard";
 
 import IndexVideo from "./containers/dashboard/video/IndexVideo";
 // check for token
@@ -155,7 +156,12 @@ class App extends Component {
               />
               <Route exact path="/video" component={VideoShow} />
               <Route exact path="/video/:videoTitle" component={VideoPlay} />
-
+              
+              <PrivateRoute
+                exact
+                path="/dashboard/Videolist"
+                component={AdminVideo}
+              />
             </Switch>
           </Fragment>
         </Router>

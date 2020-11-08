@@ -15,6 +15,7 @@ import {
   DELETE_PROJECT_DATA,
   GET_TEAM_DATA,
   DELETE_TEAM_DATA,
+  DELETE_VIDEO_DATA
 } from "./types";
 import { API } from "../config";
 
@@ -218,6 +219,17 @@ export const teamDelete = (id , isAuth) => (dispatch) => {
     .then((res) =>
       dispatch({
         type: DELETE_TEAM_DATA,
+        payload: id,
+      })
+    )
+    .catch((err) => console.log(err, "err"));
+};
+export const videoDelete = (id , isAuth) => (dispatch) => {
+  axios
+    .post(`${API}/upload/${id}`, {"isAuth":isAuth})
+    .then((res) =>
+      dispatch({
+        type: DELETE_VIDEO_DATA,
         payload: id,
       })
     )

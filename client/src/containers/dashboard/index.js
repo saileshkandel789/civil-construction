@@ -10,7 +10,6 @@ const DashboardIndex = (props) => {
   // }, []);
   return (
     <Fragment>
-      <Header/>
       <div className="admin-dashboard-section">
         <div className="row">
           <div className="col-md-2">

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { blogGet } from "../../../actions/contactUsActions";
 import BlogList from "../../layout/BlogList";
 
+
 class BlogHome extends Component {
   componentDidMount() {
     this.props.blogGet();
@@ -29,6 +30,7 @@ class BlogHome extends Component {
                 <h3>Our Latest News</h3>
               </div>
             </div>
+            {/* <p style= {{fontFamily: 'Mukta Mahee'}}>हेल्लो क गर्दै </p> */}
             <div className="row justify-content-center">{bloglist}</div>
           </div>
         </section>

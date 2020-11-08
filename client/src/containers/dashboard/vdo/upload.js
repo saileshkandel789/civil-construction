@@ -3,6 +3,12 @@ import axios from 'axios';
 import { Progress } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import { API } from "../../../config";
+import AdminNavbar from "../adminNavbar";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
+
+
 
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -50,6 +56,8 @@ class Upload extends React.Component {
     const data = new FormData();
     for (let i = 0; i < this.state.selectedVideos.length; i++) {
       data.append('file', this.state.selectedVideos[i]);
+      data.append("isAuth" , this.props.auth.isAuthenticated );
+
     }
     axios.post(`${API}/upload`, data, {
       onUploadProgress: ProgressEvent => {
@@ -68,17 +76,25 @@ class Upload extends React.Component {
    
     return (
       <React.Fragment>
-       
-        <div className="container mt-5">
+         <div className="admin-dashboard-section">
+            <div className="dashboard-header">
+                  <h3>admin section</h3>
+            </div>
+            <div className="row">
+              <div className="col-md-2">
+                <AdminNavbar />
+              </div>
+              <div className="col-md-10">
+              <div className="video-wrap mt-5">
           <div className="form-group">
             <ToastContainer />
           </div>
-          <h4>Upload Video</h4>
-          <hr className="my-4" />
+          <h3>Upload Video</h3>
+         
 
           <form method="post" name="videoUpload" action="/api/upload" id="#" encType="multipart/form-data">
             <div className="form-group files">
-              <label>Upload Your Videos Here</label>
+              
               <input
                 type="file"
                 name="file"
@@ -97,9 +113,18 @@ class Upload extends React.Component {
             </div>
           </form>
         </div>
+              </div>
+            </div>
+         </div>
+        
       </React.Fragment>
     );
   }
 }
 
-export default Upload;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps)(withRouter(Upload));
